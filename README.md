@@ -1,2 +1,2 @@
-# MovieBot
-Movie Bot
+# NewsBOT
+
