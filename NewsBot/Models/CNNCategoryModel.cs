@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +9,33 @@ namespace NewsBot.Models
 
     public class Rootobject
     {
+        [JsonProperty("rss")]
         public Rss rss { get; set; }
     }
 
     public class Rss
     {
+        [JsonProperty("xmlnsdc")]
         public string xmlnsdc { get; set; }
+        [JsonProperty("xmlnscontent")]
         public string xmlnscontent { get; set; }
+        [JsonProperty("xmlnsatom")]
         public string xmlnsatom { get; set; }
+        [JsonProperty("xmlnsmedia")]
         public string xmlnsmedia { get; set; }
+        [JsonProperty("xmlnsfeedburner")]
         public string xmlnsfeedburner { get; set; }
+        [JsonProperty("version")]
         public string version { get; set; }
+        [JsonProperty("channel")]
         public Channel channel { get; set; }
     }
 
     public class Channel
     {
+        [JsonProperty("title")]
         public string title { get; set; }
+        [JsonProperty("description")]
         public string description { get; set; }
         public string link { get; set; }
         public Image image { get; set; }
@@ -68,12 +79,19 @@ namespace NewsBot.Models
 
     public class Item
     {
+        [JsonProperty("title")]
         public string title { get; set; }
+        [JsonProperty("description")]
         public string description { get; set; }
+        [JsonProperty("link")]
         public string link { get; set; }
+        [JsonProperty("guid")]
         public Guid guid { get; set; }
+        [JsonProperty("pubDate")]
         public string pubDate { get; set; }
+        [JsonProperty("mediagroup")]
         public MediaGroup mediagroup { get; set; }
+        [JsonProperty("feedburnerorgLink")]
         public string feedburnerorigLink { get; set; }
     }
 
