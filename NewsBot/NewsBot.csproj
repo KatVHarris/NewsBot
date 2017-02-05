@@ -123,10 +123,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CNNCategory.cs" />
+    <Compile Include="Models\CNNCategoryModel.cs" />
+    <Compile Include="Models\JSONConvert.cs" />
+    <Compile Include="Models\RSSCNNModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryDialog.cs" />
+    <Compile Include="RSSReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="Models\RSSJSON.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
