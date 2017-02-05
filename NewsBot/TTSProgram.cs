@@ -43,6 +43,7 @@ using System.Net.Http;
 using System.Media;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Configuration;
 
 namespace TTSSample
 
@@ -712,7 +713,7 @@ namespace TTSSample
             // Free: https://www.microsoft.com/cognitive-services/en-us/subscriptions?productId=/products/Bing.Speech.Preview
             // Paid: https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/Bing.Speech/pricingtier/S0
 
-            Authentication auth = new Authentication("_REPLACE_KEY_");
+            Authentication auth = new Authentication(ConfigurationManager.AppSettings["BingSpeechAPIKey"]);
 
             try
             {
@@ -771,7 +772,7 @@ namespace TTSSample
             // Free: https://www.microsoft.com/cognitive-services/en-us/subscriptions?productId=/products/Bing.Speech.Preview
             // Paid: https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/Bing.Speech/pricingtier/S0
 
-            Authentication auth = new Authentication("_REPLACE_KEY_");
+            Authentication auth = new Authentication(ConfigurationManager.AppSettings["BingSpeechAPIKey"]);
 
             try
             {
