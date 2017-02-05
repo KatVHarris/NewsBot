@@ -124,6 +124,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CNNCategoryModel.cs" />
+    <Compile Include="Models\IItem.cs" />
+    <Compile Include="Models\INytModel.cs" />
     <Compile Include="Models\JSONConvert.cs" />
     <Compile Include="Models\NytWorldModel.cs" />
     <Compile Include="Models\NytTopModel.cs" />

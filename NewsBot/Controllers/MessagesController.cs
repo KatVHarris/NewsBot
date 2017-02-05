@@ -35,24 +35,30 @@ namespace NewsBot
                 //await Conversation.SendAsync(activity, () => new QueryDialog());
 
                 var message = activity.Text;
-                string headline = "";
                 string unformated = "";
+
                 List<NytTopModel.Item> topHeadlines;
                 List<NytWorldModel.Item> worldHeadlines;
+                string topHeadline = "";
+                string worldHeadline = "";
+
+                Activity reply = null;
+
                 switch (message)
                 {
                     case "read headlines":
                         break;
                     case "top stories":
-                        //topHeadlines = JSONConvert.localConvertXML("http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml");
-                        //headline = GetFirst10Items(headlines);
-                        //unformated = GetUnformattedFirst10Items(headlines);
+                        topHeadlines = JSONConvert.ConvertTopXml("http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml");
+                        topHeadline = GetFirst10TopItems(topHeadlines);
+                        unformated = GetUnformattedFirst10TopItems(topHeadlines);
+                        reply = activity.CreateReply(topHeadline);
                         break;
                     case "world":
-                        worldHeadlines = JSONConvert.localConvertXML("http://rss.nytimes.com/services/xml/rss/nyt/World.xml");
-                        headline = GetFirst10Items(worldHeadlines);
-                        unformated = GetUnformattedFirst10Items(worldHeadlines);
-
+                        worldHeadlines = JSONConvert.ConvertWorldXml("http://rss.nytimes.com/services/xml/rss/nyt/World.xml");
+                        worldHeadline = GetFirst10WorldItems(worldHeadlines);
+                        unformated = GetUnformattedFirst10WorldItems(worldHeadlines);
+                        reply = activity.CreateReply(worldHeadline);
                         break;
                     case "business":
                         //headlines = JSONConvert.localConvertXML("http://rss.nytimes.com/services/xml/rss/nyt/World.xml");
@@ -70,8 +76,8 @@ namespace NewsBot
                         break;
                 }
 
-                Activity reply = activity.CreateReply(headline);
-                await connector.Conversations.ReplyToActivityAsync(reply);
+                if (reply != null)
+                    await connector.Conversations.ReplyToActivityAsync(reply);
 
                 var bingClientTTS = new TTSSample.Program();
                 bingClientTTS.PlayVoice(unformated);
@@ -115,7 +121,23 @@ namespace NewsBot
         }
 
 
-        public string GetFirst10Items(List<NytWorldModel.Item> allheadlines)
+        public string GetFirst10TopItems(List<NytTopModel.Item> allheadlines)
+        {
+            string formatedString = "";
+            int count = 0;
+            foreach (NytTopModel.Item i in allheadlines)
+            {
+                if (count < 10)
+                {
+                    formatedString = formatedString + "* " + i.title + " \n ";
+                    count++;
+                }
+                else
+                    break;
+            }
+            return formatedString;
+        }
+        public string GetFirst10WorldItems(List<NytWorldModel.Item> allheadlines)
         {
             string formatedString = "";
             int count = 0;
@@ -140,16 +162,33 @@ namespace NewsBot
 
 
         }
-        private string GetUnformattedFirst10Items(List<NytWorldModel.Item> allheadlines)
+        private string GetUnformattedFirst10TopItems(List<NytTopModel.Item> allheadlines)
+        {
+            string unformattedHeadlines = "";
+            int count = 0;
+            foreach (NytTopModel.Item i in allheadlines)
+            {
+                if (count <= 10)
+                {
+                    unformattedHeadlines = unformattedHeadlines + i.title + ", ";
+                    count++;
+                }
+                else
+                    break;
+            }
+            return unformattedHeadlines;
+        }
+        private string GetUnformattedFirst10WorldItems(List<NytWorldModel.Item> allheadlines)
         {
             string unformattedHeadlines = "";
             int count = 0;
             foreach (NytWorldModel.Item i in allheadlines)
             {
-                if (count <= 10) { 
+                if (count <= 10)
+                {
                     unformattedHeadlines = unformattedHeadlines + i.title + ", ";
-                count++;
-            }
+                    count++;
+                }
                 else
                     break;
             }

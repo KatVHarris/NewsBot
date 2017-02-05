@@ -37,7 +37,7 @@ namespace NewsBot
                     break;
                 case "world":
                     //getRSSFeed("world");
-                    List<NytWorldModel.Item> headlines = JSONConvert.localConvertXML("http://rss.cnn.com/rss/cnn_topstories.rss");
+                    List<NytWorldModel.Item> headlines = JSONConvert.ConvertWorldXml("http://rss.cnn.com/rss/cnn_topstories.rss");
                     headline = GetFirst10Items(headlines);
                     unformated = GetUnformattedFirst10Items(headlines);
                     TalkToUser(context, unformated);

@@ -22,13 +22,8 @@ namespace NewsBot.Models
 
         }
         //public static List<Item> headlinesList = new List<Item>();
-        public static List<NytWorldModel.Item> localConvertXML(string RSSfeed)
+        public static List<NytTopModel.Item> ConvertTopXml(string RSSfeed)
         {
-
-            //string jsonText = Resources.JSONTest2;
-            // To convert an XML node contained in string xml into a JSON string   
-            // var xmlString = GetXmlLiteralString(); // for testing
-
             var xmlString = GetXmlStringFromUrl(RSSfeed);
 
             XmlDocument xmlDoc = new XmlDocument();
@@ -36,24 +31,26 @@ namespace NewsBot.Models
             string jsonText = JsonConvert.SerializeXmlNode(xmlDoc);
 
             // Deserialize JSON here (NYT Top Stories)
-            //NytTopModel.Rootobject myRoot = JsonConvert.DeserializeObject<NytTopModel.Rootobject>(jsonText);
-            ////Rootobject root = JsonConvert.DeserializeObject<Rootobject>(jsonText);
-            //topHeadlineList = new List<NytTopModel.Item>();
-            //topHeadlineList = myRoot.rss.channel.item;
-            //return currentHeadLineList;
-
-            // Deserialize JSON here (NYT World)
-            NytWorldModel.Rootobject myRoot = JsonConvert.DeserializeObject<NytWorldModel.Rootobject>(jsonText);
-            //Rootobject root = JsonConvert.DeserializeObject<Rootobject>(jsonText);
-            worldHeadlineList = new List<NytWorldModel.Item>();
-            worldHeadlineList = myRoot.rss.channel.item;
-
-            return worldHeadlineList;
-
-            // To convert JSON text contained in string json into an XML node
-            //XmlDocument xmlDocWithJson = JsonConvert.DeserializeXmlNode(jsonString);
+            NytTopModel.Rootobject myRoot = JsonConvert.DeserializeObject<NytTopModel.Rootobject>(jsonText);
+            topHeadlineList = new List<NytTopModel.Item>();
+            topHeadlineList = myRoot.rss.channel.item;
+            return topHeadlineList;            
         }
 
+        public static List<NytWorldModel.Item> ConvertWorldXml(string RSSfeed)
+        {
+            var xmlString = GetXmlStringFromUrl(RSSfeed);
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(xmlString);
+            string jsonText = JsonConvert.SerializeXmlNode(xmlDoc);
+            
+            // Deserialize JSON here (NYT World)
+            NytWorldModel.Rootobject myRoot = JsonConvert.DeserializeObject<NytWorldModel.Rootobject>(jsonText);
+            worldHeadlineList = new List<NytWorldModel.Item>();
+            worldHeadlineList = myRoot.rss.channel.item;
+            return worldHeadlineList;
+        }
 
         static string GetXmlStringFromUrl(string RSSURL)
         {

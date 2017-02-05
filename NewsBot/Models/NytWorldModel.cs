@@ -50,7 +50,7 @@ namespace NewsBot.Models
             public string link { get; set; }
         }
 
-        public class Item
+        public class Item: IItem
         {
             public string title { get; set; }
             public string link { get; set; }
