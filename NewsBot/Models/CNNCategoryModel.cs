@@ -37,18 +37,30 @@ namespace NewsBot.Models
         public string title { get; set; }
         [JsonProperty("description")]
         public string description { get; set; }
+        [JsonProperty("link")]
         public string link { get; set; }
+        [JsonProperty("image")]
         public Image image { get; set; }
+        [JsonProperty("generator")]
         public string generator { get; set; }
+        [JsonProperty("lastBuildDate")]
         public string lastBuildDate { get; set; }
+        [JsonProperty("pubDate")]
         public string pubDate { get; set; }
+        [JsonProperty("copyright")]
         public string copyright { get; set; }
+        [JsonProperty("language")]
         public string language { get; set; }
+        [JsonProperty("ttl")]
         public string ttl { get; set; }
+        [JsonProperty("atom10link")]
         public Atom10Link[] atom10link { get; set; }
+        [JsonProperty("feeburnerinfo")]
         public FeedburnerInfo feedburnerinfo { get; set; }
+        [JsonProperty("thespringboxskin")]
         public ThespringboxSkin thespringboxskin { get; set; }
-        public List<Item> items { get; set; }
+        [JsonProperty("item")]
+        public List<Item> item { get; set; }
     }
 
     public class Image

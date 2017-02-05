@@ -10,8 +10,15 @@ namespace NewsBot.Models
 {
     public static class JSONConvert
     {
+        public static List<Item> currentHeadLineList;
+        public static void BuildHeadlineListFromXML(string RSSfeed)
+        {
+            currentHeadLineList = new List<Item>();
+            currentHeadLineList = localConvertXML(RSSfeed);
+
+        }
         //public static List<Item> headlinesList = new List<Item>();
-        public static List<Item> ConvertXML(string RSSfeed)
+        public static List<Item> localConvertXML(string RSSfeed)
         {
             // To convert an XML node contained in string xml into a JSON string   
             // var xmlString = GetXmlLiteralString(); // for testing
@@ -20,14 +27,15 @@ namespace NewsBot.Models
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(xmlString);
             string jsonText = JsonConvert.SerializeXmlNode(xmlDoc);
-            List<Item> headlinesList = new List<Item>();
-            Rss root = JsonConvert.DeserializeObject<Rss>(jsonText);
-            headlinesList  = root.channel.items;
-            return headlinesList;
+            Rss root = new Rss();
+            root = JsonConvert.DeserializeObject<Rss>(jsonText);
+            currentHeadLineList = new List<Item>();
+            return currentHeadLineList;
 
             // To convert JSON text contained in string json into an XML node
             //XmlDocument xmlDocWithJson = JsonConvert.DeserializeXmlNode(jsonString);
         }
+
 
         static string GetXmlStringFromUrl(string RSSURL)
         {

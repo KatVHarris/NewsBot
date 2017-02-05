@@ -29,7 +29,7 @@ namespace NewsBot
                 case "read headlines":
                     break;
                 case "top stories":
-                    List<Item> headlines = JSONConvert.ConvertXML("http://rss.cnn.com/rss/cnn_topstories.rss");
+                    List<Item> headlines = JSONConvert.localConvertXML("http://rss.cnn.com/rss/cnn_topstories.rss");
                     headline = headlines[0].title;
                     break;
                 case "world":
