@@ -712,7 +712,7 @@ namespace TTSSample
             // Free: https://www.microsoft.com/cognitive-services/en-us/subscriptions?productId=/products/Bing.Speech.Preview
             // Paid: https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/Bing.Speech/pricingtier/S0
 
-            Authentication auth = new Authentication("put in a valid key");
+            Authentication auth = new Authentication("3aeb1676aa884368a0933acca23164b0");
 
             try
             {
@@ -771,7 +771,7 @@ namespace TTSSample
             // Free: https://www.microsoft.com/cognitive-services/en-us/subscriptions?productId=/products/Bing.Speech.Preview
             // Paid: https://portal.azure.com/#create/Microsoft.CognitiveServices/apitype/Bing.Speech/pricingtier/S0
 
-            Authentication auth = new Authentication("7bcb96bb0aa2407ba3d7dfcb6994346d");
+            Authentication auth = new Authentication("3aeb1676aa884368a0933acca23164b0");
 
             try
             {

@@ -49,9 +49,18 @@ namespace NewsBot
             }
             //RssReader reader = new RssReader();
             //string x = reader.convertRss(message.Text);
-
             await context.PostAsync(headline);
-            context.Wait(MessageReceivedAsync);          
+            context.Wait(MessageReceivedAsync);
+            await TalkToUser(context, headline);
+        }
+
+        public async Task TalkToUser(IDialogContext context, string headline)
+        {
+            //Speak aloud the results
+            //var bingClientTTS = new TTSSample.Program();
+            //await bingClientTTS.PlayVoice(headline);
+            
+
         }
 
         public string GetFirst10Items(List<Item> allheadlines)
@@ -59,7 +68,7 @@ namespace NewsBot
             string formatedString = "";
             foreach (Item i in allheadlines)
             {
-                formatedString = formatedString + "* "+ i.title + " \n\n ";
+                formatedString = formatedString + "* "+ i.title + " \n ";
             }
             return formatedString;
         }

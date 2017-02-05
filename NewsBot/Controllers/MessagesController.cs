@@ -31,12 +31,9 @@ namespace NewsBot
                 //Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
                 //await connector.Conversations.ReplyToActivityAsync(reply);
                 await Conversation.SendAsync(activity, () => new QueryDialog());
-
                 //Speak aloud the results
-
-                // var bingClientTTS = new TTSSample.Program();
-                // bingClientTTS.PlayVoice(activity.Text);
-               
+                //var bingClientTTS = new TTSSample.Program();
+                //await bingClientTTS.PlayVoice(activity.Text);
 
             }
             else
@@ -47,6 +44,7 @@ namespace NewsBot
 
             return response;
         }
+
 
         private Activity HandleSystemMessage(Activity message)
         {
