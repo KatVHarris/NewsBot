@@ -30,18 +30,18 @@ namespace NewsBot
                     break;
                 case "top stories":
                     List<Item> headlines = JSONConvert.localConvertXML("http://rss.cnn.com/rss/cnn_topstories.rss");
-                    headline = headlines[0].title;
+                    headline = GetFirst10Items(headlines);
                     break;
                 case "world":
-                    getRSSFeed("world");
+                    //getRSSFeed("world");
 
                     break;
                 case "business":
-                    getRSSFeed("business");
+                    //getRSSFeed("business");
 
                     break;
                 case "health":
-                    getRSSFeed("health");
+                    //getRSSFeed("health");
 
                     break;
                 default:
@@ -50,13 +50,18 @@ namespace NewsBot
             //RssReader reader = new RssReader();
             //string x = reader.convertRss(message.Text);
 
-            await context.PostAsync($": You said: "+ headline);
+            await context.PostAsync(headline);
             context.Wait(MessageReceivedAsync);          
         }
 
-        public void getRSSFeed(string category)
+        public string GetFirst10Items(List<Item> allheadlines)
         {
-
+            string formatedString = "";
+            foreach (Item i in allheadlines)
+            {
+                formatedString = formatedString + "* "+ i.title + " \n\n ";
+            }
+            return formatedString;
         }
     }
 

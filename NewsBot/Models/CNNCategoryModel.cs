@@ -6,7 +6,7 @@ using System.Web;
 
 namespace NewsBot.Models
 {
-
+    /*
     public class Rootobject
     {
         [JsonProperty("rss")]
@@ -15,21 +15,22 @@ namespace NewsBot.Models
 
     public class Rss
     {
-        [JsonProperty("xmlnsdc")]
+        [JsonProperty("@xmlns:dc")]
         public string xmlnsdc { get; set; }
-        [JsonProperty("xmlnscontent")]
+        [JsonProperty("@xmlns:content")]
         public string xmlnscontent { get; set; }
-        [JsonProperty("xmlnsatom")]
+        [JsonProperty("@xmlns:atom")]
         public string xmlnsatom { get; set; }
-        [JsonProperty("xmlnsmedia")]
+        [JsonProperty("@xmlns:media")]
         public string xmlnsmedia { get; set; }
-        [JsonProperty("xmlnsfeedburner")]
+        [JsonProperty("@xmlns:feedburner")]
         public string xmlnsfeedburner { get; set; }
         [JsonProperty("version")]
         public string version { get; set; }
         [JsonProperty("channel")]
         public Channel channel { get; set; }
     }
+
 
     public class Channel
     {
@@ -125,5 +126,5 @@ namespace NewsBot.Models
         public string height { get; set; }
         public string width { get; set; }
     }
-
+    */
 }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using NewsBot.Properties;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,16 +21,20 @@ namespace NewsBot.Models
         //public static List<Item> headlinesList = new List<Item>();
         public static List<Item> localConvertXML(string RSSfeed)
         {
+
+            string jsonText = Resources.JSONTest2;
             // To convert an XML node contained in string xml into a JSON string   
             // var xmlString = GetXmlLiteralString(); // for testing
-            var xmlString = GetXmlStringFromUrl(RSSfeed);
+
+            /*var xmlString = GetXmlStringFromUrl(RSSfeed);
 
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(xmlString);
             string jsonText = JsonConvert.SerializeXmlNode(xmlDoc);
-            Rss root = new Rss();
-            root = JsonConvert.DeserializeObject<Rss>(jsonText);
+            */
+            Rootobject root = JsonConvert.DeserializeObject<Rootobject>(jsonText);
             currentHeadLineList = new List<Item>();
+            currentHeadLineList = root.channel.item;
             return currentHeadLineList;
 
             // To convert JSON text contained in string json into an XML node
