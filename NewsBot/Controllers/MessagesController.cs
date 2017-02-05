@@ -26,16 +26,26 @@ namespace NewsBot
                 //// calculate something for us to return
                 //int length = (activity.Text ?? string.Empty).Length;
 
+<<<<<<< HEAD
                 //// return our reply to the user
                 //Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
                 //await connector.Conversations.ReplyToActivityAsync(reply);
                 await Conversation.SendAsync(activity, () => new QueryDialog());
+=======
+                // return our reply to the user
+                Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
+                await connector.Conversations.ReplyToActivityAsync(reply);
+                var bingClientTTS = new TTSSample.Program();
+                bingClientTTS.PlayVoice(activity.Text);
+               
+>>>>>>> ajbranch
             }
             else
             {
                 HandleSystemMessage(activity);
             }
             var response = Request.CreateResponse(HttpStatusCode.OK);
+
             return response;
         }
 
