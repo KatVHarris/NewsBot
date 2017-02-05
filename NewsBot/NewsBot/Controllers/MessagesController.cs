@@ -28,12 +28,16 @@ namespace NewsBot
                 // return our reply to the user
                 Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
                 await connector.Conversations.ReplyToActivityAsync(reply);
+                var bingClientTTS = new TTSSample.Program();
+                bingClientTTS.PlayVoice(activity.Text);
+               
             }
             else
             {
                 HandleSystemMessage(activity);
             }
             var response = Request.CreateResponse(HttpStatusCode.OK);
+
             return response;
         }
 
