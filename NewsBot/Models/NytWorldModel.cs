@@ -5,7 +5,7 @@ using System.Web;
 
 namespace NewsBot.Models
 {
-    public class NEWModel
+    public class NytWorldModel
     {
 
         public class Rootobject
@@ -62,7 +62,7 @@ namespace NewsBot.Models
             public string description { get; set; }
             public string dccreator { get; set; }
             public string pubDate { get; set; }
-            public Category[] category { get; set; }
+            public object category { get; set; }
         }
 
         public class Guid
@@ -85,11 +85,6 @@ namespace NewsBot.Models
             public string width { get; set; }
         }
 
-        public class Category
-        {
-            public string domain { get; set; }
-            public string text { get; set; }
-        }
 
     }
 }

@@ -30,13 +30,17 @@ namespace NewsBot
                 case "read headlines":
                     break;
                 case "top stories":
-                    List<NEWModel.Item> headlines = JSONConvert.localConvertXML("http://rss.cnn.com/rss/cnn_topstories.rss");
-                    headline = GetFirst10Items(headlines);
-                    unformated = GetUnformattedFirst10Items(headlines);
-                    TalkToUser(context,unformated);
+                    //List<NytTopModel.Item> headlines = JSONConvert.localConvertXML("http://rss.cnn.com/rss/cnn_topstories.rss");
+                    //headline = GetFirst10Items(headlines);
+                    //unformated = GetUnformattedFirst10Items(headlines);
+                    //TalkToUser(context,unformated);
                     break;
                 case "world":
                     //getRSSFeed("world");
+                    List<NytWorldModel.Item> headlines = JSONConvert.localConvertXML("http://rss.cnn.com/rss/cnn_topstories.rss");
+                    headline = GetFirst10Items(headlines);
+                    unformated = GetUnformattedFirst10Items(headlines);
+                    TalkToUser(context, unformated);
 
                     break;
                 case "business":
@@ -58,10 +62,10 @@ namespace NewsBot
            
         }
 
-        private string GetUnformattedFirst10Items(List<NEWModel.Item> allheadlines)
+        private string GetUnformattedFirst10Items(List<NytWorldModel.Item> allheadlines)
         {
             string unformattedHeadlines = "";
-            foreach (NEWModel.Item i in allheadlines)
+            foreach (NytWorldModel.Item i in allheadlines)
             {
                 unformattedHeadlines = unformattedHeadlines + i.title + ", ";
             }
@@ -77,10 +81,10 @@ namespace NewsBot
 
         }
 
-        public string GetFirst10Items(List<NEWModel.Item> allheadlines)
+        public string GetFirst10Items(List<NytWorldModel.Item> allheadlines)
         {
             string formatedString = "";
-            foreach (NEWModel.Item i in allheadlines)
+            foreach (NytWorldModel.Item i in allheadlines)
             {
                 formatedString = formatedString + "* "+ i.title + " \n ";
             }

@@ -37,32 +37,33 @@ namespace NewsBot
                 var message = activity.Text;
                 string headline = "";
                 string unformated = "";
-                List<NEWModel.Item> headlines;
+                List<NytTopModel.Item> topHeadlines;
+                List<NytWorldModel.Item> worldHeadlines;
                 switch (message)
                 {
                     case "read headlines":
                         break;
                     case "top stories":
-                        headlines = JSONConvert.localConvertXML("http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml");
-                        headline = GetFirst10Items(headlines);
-                        unformated = GetUnformattedFirst10Items(headlines);
+                        //topHeadlines = JSONConvert.localConvertXML("http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml");
+                        //headline = GetFirst10Items(headlines);
+                        //unformated = GetUnformattedFirst10Items(headlines);
                         break;
                     case "world":
-                        headlines = JSONConvert.localConvertXML("http://rss.nytimes.com/services/xml/rss/nyt/World.xml");
-                        headline = GetFirst10Items(headlines);
-                        unformated = GetUnformattedFirst10Items(headlines);
+                        worldHeadlines = JSONConvert.localConvertXML("http://rss.nytimes.com/services/xml/rss/nyt/World.xml");
+                        headline = GetFirst10Items(worldHeadlines);
+                        unformated = GetUnformattedFirst10Items(worldHeadlines);
 
                         break;
                     case "business":
-                        headlines = JSONConvert.localConvertXML("http://rss.nytimes.com/services/xml/rss/nyt/World.xml");
-                        headline = GetFirst10Items(headlines);
-                        unformated = GetUnformattedFirst10Items(headlines);
+                        //headlines = JSONConvert.localConvertXML("http://rss.nytimes.com/services/xml/rss/nyt/World.xml");
+                        //headline = GetFirst10Items(headlines);
+                        //unformated = GetUnformattedFirst10Items(headlines);
 
                         break;
                     case "health":
-                        headlines = JSONConvert.localConvertXML("http://rss.nytimes.com/services/xml/rss/nyt/World.xml");
-                        headline = GetFirst10Items(headlines);
-                        unformated = GetUnformattedFirst10Items(headlines);
+                        //headlines = JSONConvert.localConvertXML("http://rss.nytimes.com/services/xml/rss/nyt/World.xml");
+                        //headline = GetFirst10Items(headlines);
+                        //unformated = GetUnformattedFirst10Items(headlines);
 
                         break;
                     default:
@@ -114,11 +115,11 @@ namespace NewsBot
         }
 
 
-        public string GetFirst10Items(List<NEWModel.Item> allheadlines)
+        public string GetFirst10Items(List<NytWorldModel.Item> allheadlines)
         {
             string formatedString = "";
             int count = 0;
-            foreach (NEWModel.Item i in allheadlines)
+            foreach (NytWorldModel.Item i in allheadlines)
             {
                 if (count < 10)
                 {
@@ -139,11 +140,11 @@ namespace NewsBot
 
 
         }
-        private string GetUnformattedFirst10Items(List<NEWModel.Item> allheadlines)
+        private string GetUnformattedFirst10Items(List<NytWorldModel.Item> allheadlines)
         {
             string unformattedHeadlines = "";
             int count = 0;
-            foreach (NEWModel.Item i in allheadlines)
+            foreach (NytWorldModel.Item i in allheadlines)
             {
                 if (count <= 10) { 
                     unformattedHeadlines = unformattedHeadlines + i.title + ", ";

@@ -11,7 +11,8 @@ namespace NewsBot.Models
 {
     public static class JSONConvert
     {
-        public static List<NEWModel.Item> currentHeadLineList;
+        public static List<NytTopModel.Item> topHeadlineList;
+        public static List<NytWorldModel.Item> worldHeadlineList;
         //public static List<Item> currentHeadLineList;
 
         public static void BuildHeadlineListFromXML(string RSSfeed)
@@ -21,7 +22,7 @@ namespace NewsBot.Models
 
         }
         //public static List<Item> headlinesList = new List<Item>();
-        public static List<NEWModel.Item> localConvertXML(string RSSfeed)
+        public static List<NytWorldModel.Item> localConvertXML(string RSSfeed)
         {
 
             //string jsonText = Resources.JSONTest2;
@@ -33,11 +34,21 @@ namespace NewsBot.Models
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(xmlString);
             string jsonText = JsonConvert.SerializeXmlNode(xmlDoc);
-            NEWModel.Rootobject myRoot = JsonConvert.DeserializeObject<NEWModel.Rootobject>(jsonText);
+
+            // Deserialize JSON here (NYT Top Stories)
+            //NytTopModel.Rootobject myRoot = JsonConvert.DeserializeObject<NytTopModel.Rootobject>(jsonText);
+            ////Rootobject root = JsonConvert.DeserializeObject<Rootobject>(jsonText);
+            //topHeadlineList = new List<NytTopModel.Item>();
+            //topHeadlineList = myRoot.rss.channel.item;
+            //return currentHeadLineList;
+
+            // Deserialize JSON here (NYT World)
+            NytWorldModel.Rootobject myRoot = JsonConvert.DeserializeObject<NytWorldModel.Rootobject>(jsonText);
             //Rootobject root = JsonConvert.DeserializeObject<Rootobject>(jsonText);
-            currentHeadLineList = new List<NEWModel.Item>();
-            currentHeadLineList = myRoot.rss.channel.item;
-            return currentHeadLineList;
+            worldHeadlineList = new List<NytWorldModel.Item>();
+            worldHeadlineList = myRoot.rss.channel.item;
+
+            return worldHeadlineList;
 
             // To convert JSON text contained in string json into an XML node
             //XmlDocument xmlDocWithJson = JsonConvert.DeserializeXmlNode(jsonString);
