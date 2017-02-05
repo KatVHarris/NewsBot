@@ -125,6 +125,7 @@
     </Compile>
     <Compile Include="Models\CNNCategoryModel.cs" />
     <Compile Include="Models\JSONConvert.cs" />
+    <Compile Include="Models\NEWModel.cs" />
     <Compile Include="Models\NYTimesModel.cs" />
     <Compile Include="Models\RSSCNNModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -11,30 +11,32 @@ namespace NewsBot.Models
 {
     public static class JSONConvert
     {
-        public static List<Item> currentHeadLineList;
+        public static List<NEWModel.Item> currentHeadLineList;
+        //public static List<Item> currentHeadLineList;
+
         public static void BuildHeadlineListFromXML(string RSSfeed)
         {
-            currentHeadLineList = new List<Item>();
-            currentHeadLineList = localConvertXML(RSSfeed);
+            //currentHeadLineList = new List<Item>();
+            //currentHeadLineList = localConvertXML(RSSfeed);
 
         }
         //public static List<Item> headlinesList = new List<Item>();
-        public static List<Item> localConvertXML(string RSSfeed)
+        public static List<NEWModel.Item> localConvertXML(string RSSfeed)
         {
 
-            string jsonText = Resources.JSONTest2;
+            //string jsonText = Resources.JSONTest2;
             // To convert an XML node contained in string xml into a JSON string   
             // var xmlString = GetXmlLiteralString(); // for testing
 
-            /*var xmlString = GetXmlStringFromUrl(RSSfeed);
+            var xmlString = GetXmlStringFromUrl(RSSfeed);
 
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(xmlString);
             string jsonText = JsonConvert.SerializeXmlNode(xmlDoc);
-            */
-            Rootobject root = JsonConvert.DeserializeObject<Rootobject>(jsonText);
-            currentHeadLineList = new List<Item>();
-            currentHeadLineList = root.channel.item;
+            NEWModel.Rootobject myRoot = JsonConvert.DeserializeObject<NEWModel.Rootobject>(jsonText);
+            //Rootobject root = JsonConvert.DeserializeObject<Rootobject>(jsonText);
+            currentHeadLineList = new List<NEWModel.Item>();
+            currentHeadLineList = myRoot.rss.channel.item;
             return currentHeadLineList;
 
             // To convert JSON text contained in string json into an XML node

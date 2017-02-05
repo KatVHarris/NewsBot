@@ -30,7 +30,7 @@ namespace NewsBot
                 case "read headlines":
                     break;
                 case "top stories":
-                    List<Item> headlines = JSONConvert.localConvertXML("http://rss.cnn.com/rss/cnn_topstories.rss");
+                    List<NEWModel.Item> headlines = JSONConvert.localConvertXML("http://rss.cnn.com/rss/cnn_topstories.rss");
                     headline = GetFirst10Items(headlines);
                     unformated = GetUnformattedFirst10Items(headlines);
                     TalkToUser(context,unformated);
@@ -58,10 +58,10 @@ namespace NewsBot
            
         }
 
-        private string GetUnformattedFirst10Items(List<Item> allheadlines)
+        private string GetUnformattedFirst10Items(List<NEWModel.Item> allheadlines)
         {
             string unformattedHeadlines = "";
-            foreach (Item i in allheadlines)
+            foreach (NEWModel.Item i in allheadlines)
             {
                 unformattedHeadlines = unformattedHeadlines + i.title + ", ";
             }
@@ -77,10 +77,10 @@ namespace NewsBot
 
         }
 
-        public string GetFirst10Items(List<Item> allheadlines)
+        public string GetFirst10Items(List<NEWModel.Item> allheadlines)
         {
             string formatedString = "";
-            foreach (Item i in allheadlines)
+            foreach (NEWModel.Item i in allheadlines)
             {
                 formatedString = formatedString + "* "+ i.title + " \n ";
             }

@@ -37,25 +37,32 @@ namespace NewsBot
                 var message = activity.Text;
                 string headline = "";
                 string unformated = "";
+                List<NEWModel.Item> headlines;
                 switch (message)
                 {
                     case "read headlines":
                         break;
                     case "top stories":
-                        List<Item> headlines = JSONConvert.localConvertXML("http://rss.cnn.com/rss/cnn_topstories.rss");
+                        headlines = JSONConvert.localConvertXML("http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml");
                         headline = GetFirst10Items(headlines);
                         unformated = GetUnformattedFirst10Items(headlines);
                         break;
                     case "world":
-                        //getRSSFeed("world");
+                        headlines = JSONConvert.localConvertXML("http://rss.nytimes.com/services/xml/rss/nyt/World.xml");
+                        headline = GetFirst10Items(headlines);
+                        unformated = GetUnformattedFirst10Items(headlines);
 
                         break;
                     case "business":
-                        //getRSSFeed("business");
+                        headlines = JSONConvert.localConvertXML("http://rss.nytimes.com/services/xml/rss/nyt/World.xml");
+                        headline = GetFirst10Items(headlines);
+                        unformated = GetUnformattedFirst10Items(headlines);
 
                         break;
                     case "health":
-                        //getRSSFeed("health");
+                        headlines = JSONConvert.localConvertXML("http://rss.nytimes.com/services/xml/rss/nyt/World.xml");
+                        headline = GetFirst10Items(headlines);
+                        unformated = GetUnformattedFirst10Items(headlines);
 
                         break;
                     default:
@@ -107,11 +114,11 @@ namespace NewsBot
         }
 
 
-        public string GetFirst10Items(List<Item> allheadlines)
+        public string GetFirst10Items(List<NEWModel.Item> allheadlines)
         {
             string formatedString = "";
             int count = 0;
-            foreach (Item i in allheadlines)
+            foreach (NEWModel.Item i in allheadlines)
             {
                 if (count < 10)
                 {
@@ -132,11 +139,11 @@ namespace NewsBot
 
 
         }
-        private string GetUnformattedFirst10Items(List<Item> allheadlines)
+        private string GetUnformattedFirst10Items(List<NEWModel.Item> allheadlines)
         {
             string unformattedHeadlines = "";
             int count = 0;
-            foreach (Item i in allheadlines)
+            foreach (NEWModel.Item i in allheadlines)
             {
                 if (count <= 10) { 
                     unformattedHeadlines = unformattedHeadlines + i.title + ", ";
