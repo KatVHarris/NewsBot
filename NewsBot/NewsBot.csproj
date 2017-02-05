@@ -128,12 +128,9 @@
     <Compile Include="Models\JSONConvert.cs" />
     <Compile Include="Models\RSSCNNModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-<<<<<<< HEAD
     <Compile Include="QueryDialog.cs" />
     <Compile Include="RSSReader.cs" />
-=======
     <Compile Include="TTSProgram.cs" />
->>>>>>> ajbranch
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
