@@ -24,6 +24,7 @@ namespace NewsBot
         {
             var message = await argument;
             string headline ="";
+            string unformated = "";
             switch (message.Text)
             {
                 case "read headlines":
@@ -31,6 +32,8 @@ namespace NewsBot
                 case "top stories":
                     List<Item> headlines = JSONConvert.localConvertXML("http://rss.cnn.com/rss/cnn_topstories.rss");
                     headline = GetFirst10Items(headlines);
+                    unformated = GetUnformattedFirst10Items(headlines);
+                    TalkToUser(context,unformated);
                     break;
                 case "world":
                     //getRSSFeed("world");
@@ -47,19 +50,30 @@ namespace NewsBot
                 default:
                     break;
             }
+
             //RssReader reader = new RssReader();
             //string x = reader.convertRss(message.Text);
             await context.PostAsync(headline);
             context.Wait(MessageReceivedAsync);
-            await TalkToUser(context, headline);
+           
         }
 
-        public async Task TalkToUser(IDialogContext context, string headline)
+        private string GetUnformattedFirst10Items(List<Item> allheadlines)
+        {
+            string unformattedHeadlines = "";
+            foreach (Item i in allheadlines)
+            {
+                unformattedHeadlines = unformattedHeadlines + i.title + ", ";
+            }
+            return unformattedHeadlines;
+        }
+
+        public void TalkToUser(IDialogContext context, string headline)
         {
             //Speak aloud the results
-            //var bingClientTTS = new TTSSample.Program();
-            //await bingClientTTS.PlayVoice(headline);
-            
+            var bingClientTTS = new TTSSample.Program();
+            bingClientTTS.PlayVoice(headline);
+
 
         }
 

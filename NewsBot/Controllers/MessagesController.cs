@@ -8,6 +8,8 @@ using System.Web.Http.Description;
 using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
 using Microsoft.Bot.Builder.Dialogs;
+using System.Collections.Generic;
+using NewsBot.Models;
 
 namespace NewsBot
 {
@@ -22,19 +24,49 @@ namespace NewsBot
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                //ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+                ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+
                 //// calculate something for us to return
                 //int length = (activity.Text ?? string.Empty).Length;
 
 
                 //// return our reply to the user
-                //Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
-                //await connector.Conversations.ReplyToActivityAsync(reply);
-                await Conversation.SendAsync(activity, () => new QueryDialog());
-                //Speak aloud the results
-                //var bingClientTTS = new TTSSample.Program();
-                //await bingClientTTS.PlayVoice(activity.Text);
 
+                //await Conversation.SendAsync(activity, () => new QueryDialog());
+
+                var message = activity.Text;
+                string headline = "";
+                string unformated = "";
+                switch (message)
+                {
+                    case "read headlines":
+                        break;
+                    case "top stories":
+                        List<Item> headlines = JSONConvert.localConvertXML("http://rss.cnn.com/rss/cnn_topstories.rss");
+                        headline = GetFirst10Items(headlines);
+                        unformated = GetUnformattedFirst10Items(headlines);
+                        break;
+                    case "world":
+                        //getRSSFeed("world");
+
+                        break;
+                    case "business":
+                        //getRSSFeed("business");
+
+                        break;
+                    case "health":
+                        //getRSSFeed("health");
+
+                        break;
+                    default:
+                        break;
+                }
+
+                Activity reply = activity.CreateReply(headline);
+                await connector.Conversations.ReplyToActivityAsync(reply);
+
+                var bingClientTTS = new TTSSample.Program();
+                bingClientTTS.PlayVoice(unformated);
             }
             else
             {
@@ -44,7 +76,6 @@ namespace NewsBot
 
             return response;
         }
-
 
         private Activity HandleSystemMessage(Activity message)
         {
@@ -73,6 +104,48 @@ namespace NewsBot
             }
 
             return null;
+        }
+
+
+        public string GetFirst10Items(List<Item> allheadlines)
+        {
+            string formatedString = "";
+            int count = 0;
+            foreach (Item i in allheadlines)
+            {
+                if (count < 10)
+                {
+                    formatedString = formatedString + "* " + i.title + " \n ";
+                    count++;
+                }
+                else
+                    break;
+            }
+            return formatedString;
+        }
+
+        public void TalkToUser(string headline)
+        {
+            //Speak aloud the results
+            var bingClientTTS = new TTSSample.Program();
+            bingClientTTS.PlayVoice(headline);
+
+
+        }
+        private string GetUnformattedFirst10Items(List<Item> allheadlines)
+        {
+            string unformattedHeadlines = "";
+            int count = 0;
+            foreach (Item i in allheadlines)
+            {
+                if (count <= 10) { 
+                    unformattedHeadlines = unformattedHeadlines + i.title + ", ";
+                count++;
+            }
+                else
+                    break;
+            }
+            return unformattedHeadlines;
         }
     }
 }
